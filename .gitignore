@@ -1,5 +1,5 @@
 .vscode
-demo/*.js
+demo/**/*.js
 demo/hooks
 demo/platforms/
 demo/node_modules/

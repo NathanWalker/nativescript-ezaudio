@@ -1,7 +1,0 @@
-var main_view_model_1 = require("./main-view-model");
-function pageLoaded(args) {
-    var page = args.object;
-    page.bindingContext = new main_view_model_1.AudioPlayerTest();
-}
-exports.pageLoaded = pageLoaded;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibWFpbi1wYWdlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibWFpbi1wYWdlLnRzIl0sIm5hbWVzIjpbInBhZ2VMb2FkZWQiXSwibWFwcGluZ3MiOiJBQUFBLGdDQUE4QixtQkFBbUIsQ0FBQyxDQUFBO0FBQ2xELG9CQUFvQixJQUFJO0lBQ3BCQSxJQUFJQSxJQUFJQSxHQUFHQSxJQUFJQSxDQUFDQSxNQUFNQSxDQUFDQTtJQUN2QkEsSUFBSUEsQ0FBQ0EsY0FBY0EsR0FBR0EsSUFBSUEsaUNBQWVBLEVBQUVBLENBQUNBO0FBQ2hEQSxDQUFDQTtBQUNELE9BQU8sQ0FBQyxVQUFVLEdBQUcsVUFBVSxDQUFDIn0=
