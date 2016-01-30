@@ -1,0 +1,36 @@
+{
+  "name": "nativescript-ezaudio",
+  "version": "1.0.0",
+  "description": "{N} wrapp for the iOS and OSX audio visualization framework built upon Core Audio useful for anyone doing real-time, low-latency audio processing and visualizations.",
+  "main": "ezaudio.js",
+  "nativescript": {
+    "platforms": {
+      "ios": "0.0.1"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NathanWalker/nativescript-ezaudio.git"
+  },
+  "keywords": [
+    "NativeScript",
+    "EZAudio",
+    "JavaScript",
+    "Android",
+    "iOS",
+    "Audio"
+  ],
+  "author": {
+    "name": "Nathan Walker",
+    "email": "walkerrunpdx@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/NathanWalker/nativescript-ezaudio/issues"
+  },
+  "license": {
+    "type": "APACHE",
+    "url": "https://github.com/NathanWalker/nativescript-ezaudio/blob/master/LICENSE"
+  },
+  "homepage": "https://github.com/NathanWalker/nativescript-ezaudio",
+  "readmeFilename": "README.md"
+}

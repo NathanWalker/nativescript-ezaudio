@@ -1,0 +1,12 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
+  <ActionBar title="EZAudio Demo"/>
+  <GridLayout rows="*,auto">
+    <StackLayout row="0">
+      <TextField id="txt" text="Demo by Nathan Walker" class="title"/>
+      <Button text="{{playTxt}}" tap="{{playSound}}" />
+    </StackLayout>
+    <StackLayout row="1" class="grey">
+      <HtmlView html="Demo by &lt;a href='https://github.com/NathanWalker'&gt;Nathan Walker&lt;/a&gt;" class="footer"/>
+    </StackLayout>
+  </GridLayout>
+</Page>

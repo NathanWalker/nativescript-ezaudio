@@ -1,0 +1,24 @@
+{
+  "name": "demo-ezaudio",
+  "main": "app.js",
+  "version": "1.0.0",
+  "author": {
+    "name": "Nathan Walker",
+    "email": "walkerrunpdx@gmail.com"
+  },
+  "description": "Nativescript ezaudio demo",
+  "license": "MIT",
+  "keywords": [
+    "ezaudio",
+    "audio",
+    "nativescript"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/NathanWalker/nativescript-ezaudio.git"
+  },
+  "bugs": {
+    "url": "https://github.com/NathanWalker/nativescript-ezaudio/issues"
+  },
+  "homepage": "https://github.com/NathanWalker/nativescript-ezaudio"
+}

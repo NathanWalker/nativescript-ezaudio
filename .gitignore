@@ -1,0 +1,7 @@
+.vscode
+demo/*.js
+demo/hooks
+demo/platforms/
+demo/node_modules/
+demo/*d.ts
+demo/tsconfig.json
