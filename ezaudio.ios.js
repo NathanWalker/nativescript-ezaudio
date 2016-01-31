@@ -1,15 +1,9 @@
-"use strict";
+var ezaudio = {};
 
-function NativeEZAudio() {
-  if (!this instanceof NativeEZAudio) { // jshint ignore:line
-    //noinspection JSValidateTypes
-    return new NativeEZAudio();
-  }
-}
-
-NativeEZAudio.prototype.playAudioFile = function(player, filePath) {
+ezaudio.playAudioFile = function(player, filePath) {
+  // EZAudioUtilities.checkResultExtAudioFileOpenURLOperation(filePath, 'Failed to create ExtAudioFileRef');
   var audioFile = EZAudioFile.audioFileWithURL(NSURL.fileURLWithPath(filePath));
   player.playAudioFile(audioFile);
 };
 
-module.exports = NativeEZAudio;
+module.exports = ezaudio;
