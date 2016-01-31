@@ -1,8 +1,12 @@
 var ezaudio = {};
 
-ezaudio.playAudioFile = function(player, filePath) {
-  // EZAudioUtilities.checkResultExtAudioFileOpenURLOperation(filePath, 'Failed to create ExtAudioFileRef');
-  var audioFile = EZAudioFile.audioFileWithURL(NSURL.fileURLWithPath(filePath));
+ezaudio.playAudioFile = function(player, file) {
+  var fileParts = file.split('.');
+  var filePath = fileParts[0];
+  var fileExt = fileParts[1];
+  var soundPath = NSBundle.mainBundle().pathForResourceOfType(filePath, fileExt);
+  var url = NSURL.fileURLWithPath(soundPath);
+  var audioFile = EZAudioFile.audioFileWithURL(url);
   player.playAudioFile(audioFile);
 };
 
