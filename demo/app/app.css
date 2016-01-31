@@ -5,13 +5,14 @@
 }
 
 .footer {
-    background-color: #A0A0A0;
+    background-color: #ccc;
     horizontal-align: center;
 }
 
 button {
     font-size: 22;
     horizontal-align: center;
+    margin:40px 0;
 }
 
 image {
@@ -19,5 +20,5 @@ image {
 }
 
 .grey {
-    background-color: #A0A0A0;
+    background-color: #ccc;
 }
