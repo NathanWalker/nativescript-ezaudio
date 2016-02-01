@@ -2,7 +2,8 @@
   <ActionBar title="EZAudio Demo"/>
   <GridLayout rows="*,auto">
     <StackLayout row="0">
-      <Button text="{{playTxt}}" tap="{{playSound}}" />
+      <Button text="{{btnTxt}}" tap="{{toggleCurrentTrack}}" />
+      <!--<Button text="Swap Track" tap="{{swapTrack}}" />-->
     </StackLayout>
     <StackLayout row="1" class="grey">
       <HtmlView html="{{footerNote}}" class="footer"/>

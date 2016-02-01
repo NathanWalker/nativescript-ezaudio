@@ -1,6 +1,6 @@
-import {AudioPlayerTest} from "./main-view-model";
+import {AudioPlayerDemo} from "./main-view-model";
 function pageLoaded(args) {
     var page = args.object;
-    page.bindingContext = new AudioPlayerTest();
+    page.bindingContext = new AudioPlayerDemo();
 }
 exports.pageLoaded = pageLoaded;
