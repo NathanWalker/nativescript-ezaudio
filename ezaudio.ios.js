@@ -1,6 +1,9 @@
 var ezaudio = {};
 
-var NotificationObserver = NotificationObserver.extend({
+// This is temporary
+// TODO: move all details from demo/app/main-view-model.ts
+// to here so using the plugin will be easier
+var EZNotificationObserver = NSObject.extend({
   _onReceiveCallback: function(notification) {},
   new: function () {
     var self = this.super.new(); 
