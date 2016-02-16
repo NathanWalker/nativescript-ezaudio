@@ -1,9 +1,8 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
-  <ActionBar title="EZAudio Demo" backgroundColor="#000" color="#fff"/>
+  <ActionBar title="EZRecorder Demo" backgroundColor="#000" color="#fff"/>
   <GridLayout rows="*,auto">
     <StackLayout row="0" class="main">
-      <Button text="{{btnTxt}}" tap="{{toggleCurrentTrack}}"/>
-      <Button text="Swap Track" tap="{{swapTrack}}" />
+      <Button text="{{btnTxt}}" tap="{{toggleRecord}}"/>
     </StackLayout>
     <StackLayout row="1" class="black">
       <HtmlView html="{{footerNote}}" class="footer"/>

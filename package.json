@@ -8,6 +8,9 @@
       "ios": "0.0.1"
     }
   },
+  "scripts": {
+    "build": "tsc ezaudio.ios.ts"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/NathanWalker/nativescript-ezaudio.git"
@@ -32,5 +35,8 @@
     "url": "https://github.com/NathanWalker/nativescript-ezaudio/blob/master/LICENSE"
   },
   "homepage": "https://github.com/NathanWalker/nativescript-ezaudio",
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "typescript": "^1.7.5"
+  }
 }
