@@ -1,9 +1,10 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded">
   <ActionBar title="EZAudio Demo" backgroundColor="#000" color="#fff"/>
   <GridLayout rows="*,auto">
-    <StackLayout row="0" class="main">
+    <StackLayout class="main">
       <Button text="{{btnTxt}}" tap="{{toggleCurrentTrack}}"/>
-      <Button text="Swap Track" tap="{{swapTrack}}" />
+      <!--<Button text="Swap Track" tap="{{swapTrack}}" />-->
+      <Placeholder creatingView="{{createAudioPlot}}" class="audioPlot"/>
     </StackLayout>
     <StackLayout row="1" class="black">
       <HtmlView html="{{footerNote}}" class="footer"/>

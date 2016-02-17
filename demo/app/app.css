@@ -27,3 +27,9 @@ image {
 .black {
     background-color: #000;
 }
+
+.audioPlot {
+  width:100px;
+  height:100px;
+  
+}
