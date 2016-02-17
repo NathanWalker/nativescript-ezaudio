@@ -24,7 +24,7 @@ class EZNotificationObserver extends NSObject {
 class NSEZAudioDelegate extends NSObject implements EZAudioPlayerDelegate {
   public static ObjCProtocols = [EZAudioPlayerDelegate];
   public player: any;
-  public audioBuffer: Observable;
+  public audioEvents: Observable;
   private _bufferEvent: EventData;
   private _observers: Array<EZNotificationObserver>;
 
@@ -35,7 +35,7 @@ class NSEZAudioDelegate extends NSObject implements EZAudioPlayerDelegate {
     this.setupNotifications();
     
     if (emitBuffer) {
-      this.audioBuffer = new Observable();
+      this.audioEvents = new Observable();
       this._bufferEvent = {
         eventName: 'audioBuffer',
         data: {
@@ -50,10 +50,10 @@ class NSEZAudioDelegate extends NSObject implements EZAudioPlayerDelegate {
   public audioPlayerPlayedAudioWithBufferSizeWithNumberOfChannelsInAudioFile(player: any, buffer: number, bufferSize: number, numberOfChannels: number, audioFile: any) {
     console.log(`buffer: ${buffer.value[0]}`);
     console.log(`bufferSize: ${bufferSize}`);
-    if (this.audioBuffer) {
+    if (this.audioEvents) {
       this._bufferEvent.data.buffer = buffer.value[0];
       this._bufferEvent.data.bufferSize = bufferSize;
-      this.audioBuffer.notify(this._bufferEvent);  
+      this.audioEvents.notify(this._bufferEvent);  
     }
   }
 
