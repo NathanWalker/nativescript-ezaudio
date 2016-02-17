@@ -1,3 +1,5 @@
+import {Observable, EventData} from "data/observable";
+
 class EZNotificationObserver extends NSObject {
   private _onReceiveCallback: (notification: NSNotification) => void;
 
@@ -22,19 +24,37 @@ class EZNotificationObserver extends NSObject {
 class NSEZAudioDelegate extends NSObject implements EZAudioPlayerDelegate {
   public static ObjCProtocols = [EZAudioPlayerDelegate];
   public player: any;
+  public audioBuffer: Observable;
+  private _bufferEvent: EventData;
   private _observers: Array<EZNotificationObserver>;
 
-  public initPlayer() {
+  public initPlayer(emitBuffer?: boolean) {
     this.player = EZAudioPlayer.audioPlayerWithDelegate(this);
     // IMPORTANT: 
     // notifications can only be setup after the player has been setup in a concrete class implementation
     this.setupNotifications();
+    
+    if (emitBuffer) {
+      this.audioBuffer = new Observable();
+      this._bufferEvent = {
+        eventName: 'audioBuffer',
+        data: {
+          buffer: 0,
+          bufferSize: 0
+        }
+      };
+    }
   }
   
   // delegate notifications and events
   public audioPlayerPlayedAudioWithBufferSizeWithNumberOfChannelsInAudioFile(player: any, buffer: number, bufferSize: number, numberOfChannels: number, audioFile: any) {
     console.log(`buffer: ${buffer.value[0]}`);
     console.log(`bufferSize: ${bufferSize}`);
+    if (this.audioBuffer) {
+      this._bufferEvent.data.buffer = buffer.value[0];
+      this._bufferEvent.data.bufferSize = bufferSize;
+      this.audioBuffer.notify(this._bufferEvent);  
+    }
   }
 
   public audioPlayerUpdatedPositionInAudioFile(player: any, framePosition: number, audioFile: any) {
@@ -108,9 +128,13 @@ export class NSEZAudioPlayer {
   private _playing: boolean = false;
   private _delegate: any;
   
-  constructor() {
+  constructor(emitBuffer?: boolean) {
     this._delegate = new NSEZAudioDelegate();
-    this._delegate.initPlayer();
+    this._delegate.initPlayer(emitBuffer);
+  }
+  
+  public delegate(): any {
+    return this._delegate;
   }
   
   public play(fileName?: string, reset?: boolean) {

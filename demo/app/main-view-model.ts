@@ -15,8 +15,11 @@ export class AudioPlayerDemo extends Observable {
 
   constructor() {
     super();
-    this.player = new NSEZAudioPlayer();
     this.set(`btnTxt`, `Play Track`);
+    this.player = new NSEZAudioPlayer(true);
+    this.player.delegate().audioBuffer.on('audioBuffer', (eventData) => {
+      this.audioPlot.updateBufferWithBufferSize(eventData.data.buffer, eventData.data.bufferSize);
+    });
   }
 
   public toggleCurrentTrack(reset?: boolean) {
