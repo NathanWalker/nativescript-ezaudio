@@ -51,7 +51,7 @@ class NSEZAudioDelegate extends NSObject implements EZAudioPlayerDelegate {
     console.log(`buffer: ${buffer.value[0]}`);
     console.log(`bufferSize: ${bufferSize}`);
     if (this.audioEvents) {
-      this._bufferEvent.data.buffer = buffer.value[0];
+      this._bufferEvent.data.buffer = buffer.value;
       this._bufferEvent.data.bufferSize = bufferSize;
       this.audioEvents.notify(this._bufferEvent);  
     }

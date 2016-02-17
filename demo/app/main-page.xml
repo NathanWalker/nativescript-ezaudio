@@ -4,7 +4,7 @@
     <StackLayout class="main">
       <Button text="{{btnTxt}}" tap="{{toggleCurrentTrack}}"/>
       <!--<Button text="Swap Track" tap="{{swapTrack}}" />-->
-      <Placeholder creatingView="{{createAudioPlot}}" class="audioPlot"/>
+      <Placeholder creatingView="createAudioPlot" class="audioPlot"/>
     </StackLayout>
     <StackLayout row="1" class="black">
       <HtmlView html="{{footerNote}}" class="footer"/>
