@@ -26,15 +26,16 @@ class NSEZAudioDelegate extends NSObject implements EZAudioPlayerDelegate {
   public player: any;
   public audioEvents: Observable;
   private _bufferEvent: EventData;
+  private _positionEvent: EventData;
   private _observers: Array<EZNotificationObserver>;
 
-  public initPlayer(emitBuffer?: boolean) {
+  public initPlayer(emitEvents?: boolean) {
     this.player = EZAudioPlayer.audioPlayerWithDelegate(this);
     // IMPORTANT: 
     // notifications can only be setup after the player has been setup in a concrete class implementation
     this.setupNotifications();
     
-    if (emitBuffer) {
+    if (emitEvents) {
       this.audioEvents = new Observable();
       this._bufferEvent = {
         eventName: 'audioBuffer',
@@ -43,13 +44,19 @@ class NSEZAudioDelegate extends NSObject implements EZAudioPlayerDelegate {
           bufferSize: 0
         }
       };
+      this._positionEvent = {
+        eventName: 'position',
+        data: {
+          position: 0
+        }
+      };
     }
   }
   
   // delegate notifications and events
   public audioPlayerPlayedAudioWithBufferSizeWithNumberOfChannelsInAudioFile(player: any, buffer: number, bufferSize: number, numberOfChannels: number, audioFile: any) {
-    console.log(`buffer: ${buffer.value[0]}`);
-    console.log(`bufferSize: ${bufferSize}`);
+    // console.log(`buffer: ${buffer.value[0]}`);
+    // console.log(`bufferSize: ${bufferSize}`);
     if (this.audioEvents) {
       this._bufferEvent.data.buffer = buffer.value;
       this._bufferEvent.data.bufferSize = bufferSize;
@@ -58,7 +65,11 @@ class NSEZAudioDelegate extends NSObject implements EZAudioPlayerDelegate {
   }
 
   public audioPlayerUpdatedPositionInAudioFile(player: any, framePosition: number, audioFile: any) {
-    console.log(`updatedPositionInAudioFile: ${framePosition}`);
+    // console.log(`updatedPositionInAudioFile: ${framePosition}`);
+    if (this.audioEvents) {
+      this._positionEvent.data.position = framePosition;
+      this.audioEvents.notify(this._positionEvent);  
+    }
   }
 
   public audioPlayerReachedEndOfAudioFile(player: any, audioFile: any) {
@@ -128,9 +139,9 @@ export class NSEZAudioPlayer {
   private _playing: boolean = false;
   private _delegate: any;
   
-  constructor(emitBuffer?: boolean) {
+  constructor(emitEvents?: boolean) {
     this._delegate = new NSEZAudioDelegate();
-    this._delegate.initPlayer(emitBuffer);
+    this._delegate.initPlayer(emitEvents);
   }
   
   public delegate(): any {
@@ -215,6 +226,14 @@ export class NSEZAudioPlayer {
   public setCurrentTime(time: number): void {
     if (this.audioFileLoaded) {
       this._delegate.player.setCurrentTime(time);
+    } else {
+      this.noFileError();
+    }
+  }
+  
+  public seekToFrame(frame: number): void {
+    if (this.audioFileLoaded) {
+      this._delegate.player.seekToFrame(frame);
     } else {
       this.noFileError();
     }

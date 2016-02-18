@@ -1,17 +1,18 @@
 {
-  "nativescript": {
-    "id": "org.nativescript.demo",
-    "tns-ios": {
-      "version": "1.5.2"
-    }
-  },
-  "dependencies": {
-    "nativescript-ezaudio": "file:..",
-    "tns-core-modules": "1.5.1"
-  },
-  "devDependencies": {
-    "nativescript-dev-typescript": "^0.2.3",
-    "shelljs": "^0.5.3",
-    "typescript": "^1.7.5"
-  }
+	"nativescript": {
+		"id": "org.nativescript.demo",
+		"tns-ios": {
+			"version": "1.5.2"
+		}
+	},
+	"dependencies": {
+		"lodash": "^4.5.0",
+		"nativescript-ezaudio": "file:..",
+		"tns-core-modules": "1.6.0"
+	},
+	"devDependencies": {
+		"nativescript-dev-typescript": "^0.3.0",
+		"shelljs": "^0.6.0",
+		"typescript": "^1.7.5"
+	}
 }

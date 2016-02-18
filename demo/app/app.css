@@ -1,35 +1,52 @@
-﻿.title {
-    font-size: 20;
-    horizontal-align: center;
-    margin: 20;
-}
-
-.footer {
-    background-color: #000;
-    horizontal-align: center;
-}
-
-.main {
-  background-color:#333;
+﻿.main {
+  /*background-color:#333;*/
+  background-color: transparent;
 }
 
 button {
     font-size: 22;
     horizontal-align: center;
-    margin:40px 0;
-    color:#fff;
+    margin:20px 0;
+    color:#FFF803;
+    top:20;
+    left:0;
+    width:100%;
 }
 
-image {
-    horizontal-align: center;
+label {
+  color: #999;
+  font-size:14;
 }
 
-.black {
-    background-color: #000;
+slider {
+  width:85%;
 }
 
 .audioPlot {
-  width:100px;
-  height:100px;
-  
+  width:100%;
+  height:100%;
+  background-color: #000;
+  top:0;
+  left:0;
+}
+
+.segment-control {
+  top:400;
+  left:10;
+}
+
+.footer-area {
+    background-color: #fff;
+    width: 100%;
+    top:500px;
+    left: 0;
+}
+
+.footer {
+    background-color: #000;
+    horizontal-align: center;
+    width: 100%;
+    height:30;
+    top:500;
+    left: 0;
 }
