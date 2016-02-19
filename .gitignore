@@ -1,5 +1,6 @@
 .vscode
 *.js
+*.js.map
 demo/**/*.js
 demo/hooks
 demo/platforms/
