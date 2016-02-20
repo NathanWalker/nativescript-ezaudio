@@ -1,2 +1,6 @@
 .vscode
-demo/
+demo
+docs
+screenshots
+*.png
+*.log
