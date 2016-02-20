@@ -5,9 +5,9 @@ A NativeScript plugin for the simple, intuitive audio framework for iOS.
 
 * [Install](#install)
 * [Usage](#usage)
+* [Screenshots](#screenshots)
 * [NSEZAudioPlayer](#nsezaudioplayer)
 * [UI Components](#ui-components)
-* [Screenshots](#screenshots)
 * [Try it/Contributing](https://github.com/NathanWalker/nativescript-ezaudio/blob/master/docs/CONTRIBUTING.md)
 
 # Install
@@ -107,6 +107,16 @@ export class AudioDemo extends Observable {
 }
 ```
 
+## Screenshots
+
+Sample 1 |  Sample 2
+-------- | ---------
+![Sample1](screenshots/1.png) | ![Sample2](screenshots/2.png)
+
+Sample 3 | Sample 4
+-------- | -------
+![Sample3](screenshots/3.png) | ![Sample4](screenshots/4.png)
+
 ## NSEZAudioPlayer
 
 AudioPlayer based on [EZAudioPlayer](https://github.com/syedhali/EZAudio#EZAudioPlayer).
@@ -183,13 +193,3 @@ Property |  Value
 `fill`: `boolean` | Makes waveform solid with color. When `false`, it appears more like lines.
 `mirror`: `boolean` | Whether to mirror the waveform top/bottom.
 `bufferData`: `Object` | An Object representing the audio file's `buffer` and `bufferSize`. See [example implementation](https://github.com/NathanWalker/nativescript-ezaudio/blob/master/demo/app/player/player-view-model.ts#L54-L59)
-
-## Screenshots
-
-Sample 1 |  Sample 2
--------- | ---------
-![Sample1](screenshots/1.png) | ![Sample2](screenshots/2.png)
-
-Sample 3 | Sample 4
--------- | -------
-![Sample3](screenshots/3.png) | ![Sample4](screenshots/4.png)
