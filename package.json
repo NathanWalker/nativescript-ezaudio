@@ -1,7 +1,7 @@
 {
   "name": "nativescript-ezaudio",
   "version": "1.0.0",
-  "description": "{N} wrapp for the iOS and OSX audio visualization framework built upon Core Audio useful for anyone doing real-time, low-latency audio processing and visualizations.",
+  "description": "NativeScript plugin for the iOS audio visualization framework built upon Core Audio useful for anyone doing real-time, low-latency audio processing and visualizations.",
   "main": "ezaudio.js",
   "nativescript": {
     "platforms": {
@@ -31,7 +31,7 @@
     "url": "https://github.com/NathanWalker/nativescript-ezaudio/issues"
   },
   "license": {
-    "type": "APACHE",
+    "type": "MIT",
     "url": "https://github.com/NathanWalker/nativescript-ezaudio/blob/master/LICENSE"
   },
   "homepage": "https://github.com/NathanWalker/nativescript-ezaudio",

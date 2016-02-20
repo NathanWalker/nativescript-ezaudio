@@ -193,3 +193,7 @@ Property |  Value
 `fill`: `boolean` | Makes waveform solid with color. When `false`, it appears more like lines.
 `mirror`: `boolean` | Whether to mirror the waveform top/bottom.
 `bufferData`: `Object` | An Object representing the audio file's `buffer` and `bufferSize`. See [example implementation](https://github.com/NathanWalker/nativescript-ezaudio/blob/master/demo/app/player/player-view-model.ts#L54-L59)
+
+### Contributors
+
+* [NathanaelA](https://github.com/NathanaelA)
