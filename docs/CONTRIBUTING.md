@@ -19,6 +19,9 @@ tns platform add ios
 npm run demo  
 ```
 
+**Please note**: Demo works best in **iPhone 6 Simulator** at the moment since I'm using AbsoluteLayout.
+I will change this soon to work across various devices.
+
 # Contributing
 
 ## Submitting Pull Requests

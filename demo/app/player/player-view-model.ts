@@ -21,6 +21,12 @@ export class AudioPlayerDemo extends Observable {
   public totalDuration: string = '00:00';
   public outputs: any;
   public selectedOutput: number = 0;
+  public tracks: Array<any> = [
+    { title: 'Drake', path: 'sounds/hotline-bling.mp3' },
+    { title: 'Daft Punk', path: 'sounds/harder-better-faster.mp3' },
+    { title: 'Psy', path: 'sounds/daddy.mp3' }
+  ];
+  public selectedTrackIndex: number = 0;
   public plotStyles: Array<any> = [
     { title: 'Buffer' },
     { title: 'Rolling' }
@@ -40,11 +46,6 @@ export class AudioPlayerDemo extends Observable {
   // internal
   private _player: any;
   private _plotType: string = 'buffer';
-  private _currentTrackIndex: number = 0;
-  private _tracks: Array<string> = [
-    `sounds/hotline-bling.mp3`,
-    `sounds/harder-better-faster.mp3`
-  ];
 
   constructor(page: any) {
     super();
@@ -72,27 +73,30 @@ export class AudioPlayerDemo extends Observable {
   }
 
   public toggleCurrentTrack(e: any, reset?: boolean) {
-    this._player.togglePlay(this._tracks[this._currentTrackIndex], reset);
+    this._player.togglePlay(this.tracks[this.selectedTrackIndex].path, reset);
     if (e) {
       // only toggle btn state when triggered via view (e will be a valid ui event)
       this.toggleBtn();  
     }
     this.set('totalFrames', this._player.totalFrames());
     this.set('totalDuration', this._player.formattedDuration());
-    console.log(`currentTrack: ${this._tracks[this._currentTrackIndex]}`);
+    console.log(`currentTrack: ${this.tracks[this.selectedTrackIndex].path}`);
     console.log(`---- totalFrames: ${this.totalFrames}`);
     console.log(`---- duration: ${this._player.duration()}`);
     console.log(`---- currentTime: ${this.currentTime}`);
   }
   
-  public swapTrack() {
-    this._currentTrackIndex = this._currentTrackIndex === 0 ? 1 : 0;
-    this.toggleCurrentTrack(null, true);
+  public changeTrack(e) {
+    if (this.selectedTrackIndex != e.newIndex) {
+      this.selectedTrackIndex = e.newIndex;
+      console.log(`changeTrack: ${this.tracks[this.selectedTrackIndex].path}`);
+      this.toggleCurrentTrack(null, true); 
+    }
   }
   
-  public changePlotColor(data) {
+  public changePlotColor(e) {
     let color = '#FFF803';
-    switch (data.newIndex) {
+    switch (e.newIndex) {
       case 0:
         color = '#FFF803';
         break;
@@ -109,15 +113,15 @@ export class AudioPlayerDemo extends Observable {
     this.set('audioPlotColor', color);
   }
   
-  public changePlotType(data) {
-    this.set('audioPlotType', data.newIndex == 1 ? 'rolling' : 'buffer');
+  public changePlotType(e) {
+    this.set('audioPlotType', e.newIndex == 1 ? 'rolling' : 'buffer');
   }
   
-  public changePlotFill(data) {
+  public changePlotFill(e) {
     this.set('audioPlotFill', !this.audioPlotFill);
   }
   
-  public changePlotMirror(data) {
+  public changePlotMirror(e) {
     this.set('audioPlotMirror', !this.audioPlotMirror);
   }
   

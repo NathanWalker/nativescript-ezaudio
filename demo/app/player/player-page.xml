@@ -5,10 +5,10 @@
   <AbsoluteLayout width="100%" height="100%">
     <ez:AudioPlot id="audioPlot" class="audioPlot" color="{{audioPlotColor}}" plotType="{{audioPlotType}}" fill="{{audioPlotFill}}" mirror="{{audioPlotMirror}}" bufferData="{{audioPlotBufferData}}" />
     <Button text="{{btnTxt}}" tap="{{toggleCurrentTrack}}"/>
-    <Button text="Swap Track" tap="{{swapTrack}}" top="100"/>
+    <SegmentedBar items="{{tracks}}" top="80" left="15" selectedIndexChanged="{{changeTrack}}" width="90%" />
     <!--<ListPicker items="{{outputs}}" class="list-picker" selectedIndex="{{selectedOutput}}"
       verticalAlignment="center" horizontalAlignment="center"/>-->
-    <SegmentedBar items="{{plotColors}}" top="100" left="74" selectedIndexChanged="{{changePlotColor}}" />
+    <SegmentedBar items="{{plotColors}}" top="130" left="15" selectedIndexChanged="{{changePlotColor}}"  width="90%" />
     <Label text="{{currentTime}}" top="375" left="25"/>
     <Label text="{{totalDuration}}" top="375" left="310"/>
     <Slider value="{{framePosition}}" minValue="0" maxValue="{{totalFrames}}" top="400" left="25"/>
