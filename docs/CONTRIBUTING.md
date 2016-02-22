@@ -11,8 +11,7 @@ npm run build
 
 // now try out the demo
 cd demo  
-npm install 
-tns platform add ios
+tns install   // please note: 'tns', not npm :)
 
 // run demo in iOS simulator
 // you may see more TypeScript warnings, you can ignore :)
