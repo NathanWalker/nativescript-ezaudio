@@ -1,4 +1,4 @@
-import {Observable, EventData} from "data/observable";
+import {Observable, EventData} from 'data/observable';
 import {EZNotificationObserver} from './core';
 
 class NSEZAudioDelegate extends NSObject implements EZAudioPlayerDelegate {
@@ -97,14 +97,14 @@ class NSEZAudioDelegate extends NSObject implements EZAudioPlayerDelegate {
     }
   }
 
-  public addNotificationObserver(notificationName: string, onReceiveCallback: (notification: NSNotification) => void): EZNotificationObserver {
+  private addNotificationObserver(notificationName: string, onReceiveCallback: (notification: NSNotification) => void): EZNotificationObserver {
     var observer = EZNotificationObserver.new().initWithCallback(onReceiveCallback);
     NSNotificationCenter.defaultCenter().addObserverSelectorNameObject(observer, "onReceive", notificationName, this.player);
     this._observers.push(observer);
     return observer;
   }
 
-  public removeNotificationObserver(observer: any, notificationName: string) {
+  private removeNotificationObserver(observer: any, notificationName: string) {
     var index = this._observers.indexOf(observer);
     if (index >= 0) {
       this._observers.splice(index, 1);

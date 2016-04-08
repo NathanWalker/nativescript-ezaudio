@@ -1,15 +1,18 @@
 {
   "name": "nativescript-ezaudio",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "NativeScript plugin for the iOS audio visualization framework built upon Core Audio useful for anyone doing real-time, low-latency audio processing and visualizations.",
   "main": "ezaudio.js",
   "nativescript": {
     "platforms": {
-      "ios": "0.0.1"
+      "ios": "1.7.0"
     }
   },
   "scripts": {
-    "build": "tsc ezaudio.ios.ts"
+    "build": "tsc",
+    "demo.ios": "npm run preparedemo; cd demo; tns emulate ios",
+    "preparedemo": "npm run build; cd demo; tns plugin remove nativescript-ezaudio; tns plugin add ..; tns install",
+    "setup": "cd demo; npm install; cd ..; npm run build; cd demo; tns plugin add ..; cd .."
   },
   "repository": {
     "type": "git",
@@ -37,6 +40,6 @@
   "homepage": "https://github.com/NathanWalker/nativescript-ezaudio",
   "readmeFilename": "README.md",
   "devDependencies": {
-    "typescript": "^1.7.5"
+    "typescript": "^1.8.9"
   }
 }
