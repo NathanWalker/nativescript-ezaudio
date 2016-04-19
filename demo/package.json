@@ -1,21 +1,21 @@
 {
-	"nativescript": {
-		"id": "org.nativescript.demo",
-		"tns-ios": {
-			"version": "1.7.0"
-		}
-	},
-	"scripts": {
-		"demo": "tns livesync ios --emulator --watch --log trace"
-	},
-	"dependencies": {
-		"lodash": "^4.8.2",
-		"nativescript-ezaudio": "file:..",
-		"tns-core-modules": "1.7.1"
-	},
-	"devDependencies": {
-		"nativescript-dev-typescript": "^0.3.1",
-		"shelljs": "^0.6.0",
-		"typescript": "^1.8.9"
-	}
+  "nativescript": {
+    "id": "org.nativescript.demo",
+    "tns-ios": {
+      "version": "1.7.0"
+    }
+  },
+  "scripts": {
+    "demo": "tns livesync ios --emulator --watch --log trace"
+  },
+  "dependencies": {
+    "lodash": "^4.8.2",
+    "nativescript-ezaudio": "file:..",
+    "tns-core-modules": "1.7.1"
+  },
+  "devDependencies": {
+    "nativescript-dev-typescript": "^0.3.1",
+    "shelljs": "^0.6.0",
+    "typescript": "^1.8.9"
+  }
 }
