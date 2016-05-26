@@ -1,4 +1,5 @@
 import {Observable} from 'data/observable';
+import * as fs from 'file-system';
 import {NSEZRecorder} from 'nativescript-ezaudio';
 
 export class AudioRecorderDemo extends Observable {
@@ -7,12 +8,19 @@ export class AudioRecorderDemo extends Observable {
 
   constructor() {
     super();
-    this.recorder = new NSEZRecorder(`/tmp/recording.m4a`);
+    this.recorder = new NSEZRecorder();
     this.set(`btnTxt`, `Start Recording`);
   }
 
   public toggleRecord() {
-    return;
+    if (this.recorder.isRecording()) {
+      this.recorder.stop();
+    } else {
+      var audioFolder = fs.knownFolders.currentApp().getFolder("audio");
+      console.log(JSON.stringify(audioFolder));  
+      this.recorder.record(`${audioFolder.path}/recording.m4a`);  
+    }
+    // this.toggleBtn();
   }
   
   private toggleBtn() {

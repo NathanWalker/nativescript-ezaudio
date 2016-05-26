@@ -1,4 +1,5 @@
 .vscode
+*.d.ts
 *.js
 *.js.map
 demo/**/*.js
