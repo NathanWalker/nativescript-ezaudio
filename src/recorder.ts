@@ -40,6 +40,7 @@ class NSEZRecorderDelegate extends NSObject {
   public toggleRecord(filePath?: string) {
     if (this.isRecording) {
       this.microphone.stopFetchingAudio();
+      this.recorder.closeAudioFile();
     } else {
       this.microphone.startFetchingAudio();
       
@@ -49,7 +50,7 @@ class NSEZRecorderDelegate extends NSObject {
       //   console.log(key);
       // }
 
-      this.recorder = EZRecorder.recorderWithURLClientFormatFileTypeDelegate(NSURL.fileURLWithPath(filePath), this.microphone.audioStreamBasicDescription, EZRecorderFileTypeM4A, this);
+      this.recorder = EZRecorder.recorderWithURLClientFormatFileTypeDelegate(NSURL.fileURLWithPath(filePath), this.microphone.audioStreamBasicDescription(), EZRecorderFileTypeM4A, this);
 
       // EZRecorder method options:
       // recorderWithURLClientFormatFileFormatAudioFileTypeID
@@ -66,12 +67,12 @@ class NSEZRecorderDelegate extends NSObject {
   
   // delegate notifications and events
   public microphoneHasBufferListWithBufferSizeWithNumberOfChannels(microphone, bufferList, bufferSize, numberOfChannels) {
-    console.log(`microphoneHasBufferList bufferList: ${bufferList}`);
-    console.log(`microphoneHasBufferList bufferList.value: ${bufferList.value}`);
-    console.log(`microphoneHasBufferList bufferSize: ${bufferSize}`);
-    // if (this.isRecording) {
-    //   this.recorder.appendDataFromBufferListWithBufferSize(bufferList, bufferSize);
-    // }
+    //console.log(`microphoneHasBufferList bufferList: ${bufferList}`);
+    //console.log(`microphoneHasBufferList bufferList.value: ${bufferList.value}`);
+    //console.log(`microphoneHasBufferList bufferSize: ${bufferSize}`);
+    if (this.isRecording) {
+       this.recorder.appendDataFromBufferListWithBufferSize(bufferList, bufferSize);
+    }
   }
   
   public recorderUpdatedCurrentTime(recorder:any) {
@@ -84,8 +85,8 @@ class NSEZRecorderDelegate extends NSObject {
   }
   
   public microphoneHasAudioReceivedWithBufferSizeWithNumberOfChannels(microphone, buffer, bufferSize, numberOfChannels) {
-    console.log(`record buffer: ${buffer.value[0]}`);
-    console.log(`record bufferSize: ${bufferSize}`);
+    // console.log(`record buffer: ${buffer.value[0]}`);
+    // console.log(`record bufferSize: ${bufferSize}`);
     // if (this.audioEvents) {
     //   this._bufferEvent.data.buffer = buffer.value;
     //   this._bufferEvent.data.bufferSize = bufferSize;
