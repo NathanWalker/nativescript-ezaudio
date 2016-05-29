@@ -1,8 +1,9 @@
 import {Observable} from 'data/observable';
 import placeholder = require("ui/placeholder");
+import {topmost} from 'ui/frame';
 import {Color} from "color";
 var _ = require('lodash');
-import {NSEZAudioPlayer} from 'nativescript-ezaudio';
+import {TNSEZAudioPlayer} from 'nativescript-ezaudio';
 
 export class AudioPlayerDemo extends Observable {
   public footerNote: string = "<span style='font-family: sans-serif; color:#999; padding:15;'>Demo by <a href='https://github.com/NathanWalker'>Nathan Walker</a></span>";
@@ -50,7 +51,7 @@ export class AudioPlayerDemo extends Observable {
   constructor(page: any) {
     super();
     this.set(`btnTxt`, `Play Track`);
-    this._player = new NSEZAudioPlayer(true);
+    this._player = new TNSEZAudioPlayer(true);
     this._player.delegate().audioEvents.on('audioBuffer', (eventData) => {
       this.set('audioPlotBufferData', {
         buffer: eventData.data.buffer,
@@ -70,6 +71,10 @@ export class AudioPlayerDemo extends Observable {
     this.on(Observable.propertyChangeEvent, _.debounce(this.seekToFrame.bind(this), 500, {leading: true}));
     this.set('outputs', EZAudioDevice.outputDevices());
     console.log(this.outputs);
+  }
+
+  public viewRecorder() {
+    topmost().navigate("recorder/recorder-page");
   }
 
   public toggleCurrentTrack(e: any, reset?: boolean) {

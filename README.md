@@ -6,8 +6,10 @@ A NativeScript plugin for the simple, intuitive audio framework for iOS.
 * [Install](#install)
 * [Usage](#usage)
 * [Screenshots](#screenshots)
-* [NSEZAudioPlayer](#nsezaudioplayer)
+* [TNSEZAudioPlayer](#tnsezaudioplayer)
+* [TNSEZRecorder](#tnsezrecorder)
 * [UI Components](#ui-components)
+* [Why the `TNS` prefixed name?](#why-the-tns-prefixed-name)
 * [Try it/Contributing](https://github.com/NathanWalker/nativescript-ezaudio/blob/master/docs/CONTRIBUTING.md)
 
 # Install
@@ -66,7 +68,7 @@ exports.pageLoaded = pageLoaded;
 
 // main-view-model.ts
 import {Observable} from 'data/observable';
-import {NSEZAudioPlayer} from 'nativescript-ezaudio';
+import {TNSEZAudioPlayer} from 'nativescript-ezaudio';
 
 export class AudioDemo extends Observable {
   public btnTxt: string = 'Play Track';
@@ -87,7 +89,7 @@ export class AudioDemo extends Observable {
 
   constructor(page: any) {
     super();
-    this._player = new NSEZAudioPlayer(true);
+    this._player = new TNSEZAudioPlayer(true);
     this._player.delegate().audioEvents.on('audioBuffer', (eventData) => {
       this.set('audioPlotBufferData', {
         buffer: eventData.data.buffer,
@@ -117,18 +119,18 @@ Sample 3 | Sample 4
 -------- | -------
 ![Sample3](screenshots/3.png) | ![Sample4](screenshots/4.png)
 
-## NSEZAudioPlayer
+## TNSEZAudioPlayer
 
 AudioPlayer based on [EZAudioPlayer](https://github.com/syedhali/EZAudio#EZAudioPlayer).
 
 Creating:
 ```
 // Option 1: simple
-this._player = new NSEZAudioPlayer();
+this._player = new TNSEZAudioPlayer();
 
 // Option 2: advanced
 // passing true to constructor will let the player know it should emit events
-this._player = new NSEZAudioPlayer(true);
+this._player = new TNSEZAudioPlayer(true);
 
 // it allows you to listen to events like so:
 this._player.delegate().audioEvents.on('audioBuffer', (eventData) => {
@@ -173,6 +175,41 @@ Event |  Description
 `changePlayState` | When the player state changes, ie. play/pause
 `seeked` | When the audio file has been seeked to a certain frame number
 
+## TNSEZRecorder
+
+Recorder based on [EZRecorder](https://github.com/syedhali/EZAudio#ezrecorder).
+
+Creating:
+```
+this._recorder = new TNSEZRecorder();
+
+// it allows you to listen to events like so:
+this._recorder.delegate().audioEvents.on('audioBuffer', (eventData) => {
+  this.set('audioPlotBufferData', {
+    buffer: eventData.data.buffer,
+    bufferSize: eventData.data.bufferSize
+  });
+});
+
+```
+
+#### Methods
+
+Event |  Description
+-------- | ---------
+`record(filePath: string)`: `void` | Record a `.m4a` file. Pass in an absoulte filePath.
+`stop()`: `void` | Stop recording
+`isRecording()`: `boolean` | Determine whether recorder is recording
+`deviceInputs()`: `Array<any>` | Collection of input devices
+`setDevice(device:any)`: `void` | Set the input device
+
+#### Events
+
+Event |  Description
+-------- | ---------
+`audioBuffer` | While recording, get the `buffer` and `bufferSize` to set an `AudioPlot`'s `bufferData`
+`recordTime` | Current recording time
+
 ## UI Components
 
 ### AudioPlot
@@ -197,3 +234,16 @@ Property |  Value
 ### Contributors
 
 * [NathanaelA](https://github.com/NathanaelA)
+
+## Why the TNS prefixed name?
+
+`TNS` stands for **T**elerik **N**ative**S**cript
+
+iOS uses classes prefixed with `NS` (stemming from the [NeXTSTEP](https://en.wikipedia.org/wiki/NeXTSTEP) days of old):
+https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSString_Class/
+
+To avoid confusion with iOS native classes, `TNS` is used instead.
+
+## License
+
+MIT

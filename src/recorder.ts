@@ -4,7 +4,7 @@
 import {Observable, EventData} from 'data/observable';
 import {EZNotificationObserver} from './core';
 
-class NSEZRecorderDelegate extends NSObject {
+class TNSEZRecorderDelegate extends NSObject {
   public static ObjCProtocols = [EZRecorderDelegate, EZMicrophoneDelegate];
   public recorder: any;
   public microphone: any;
@@ -25,7 +25,6 @@ class NSEZRecorderDelegate extends NSObject {
     this._recordingSession.setActiveError(true, null);
     this._recordingSession.requestRecordPermission((allowed: boolean) => {
       if (allowed) {
-        console.log(`ALLOWED!`);
         this.microphone = EZMicrophone.microphoneWithDelegate(this);
         // errorRef = new interop.Reference();
         // this._recordingSession.overrideOutputAudioPortError(AVAudioSessionPortOverrideSpeaker, errorRef);
@@ -40,23 +39,11 @@ class NSEZRecorderDelegate extends NSObject {
   public toggleRecord(filePath?: string) {
     if (this.isRecording) {
       this.microphone.stopFetchingAudio();
-      this.recorder.closeAudioFile();
+      this.finish();
     } else {
       this.microphone.startFetchingAudio();
-      
-      // console.log(`-----`);
-      // console.log(`EZRecorderFileTypeM4A: ${EZRecorderFileTypeM4A}`);
-      // for (let key in this.microphone) {
-      //   console.log(key);
-      // }
 
       this.recorder = EZRecorder.recorderWithURLClientFormatFileTypeDelegate(NSURL.fileURLWithPath(filePath), this.microphone.audioStreamBasicDescription(), EZRecorderFileTypeM4A, this);
-
-      // EZRecorder method options:
-      // recorderWithURLClientFormatFileFormatAudioFileTypeID
-      // recorderWithURLClientFormatFileFormatAudioFileTypeIDDelegate
-      // recorderWithURLClientFormatFileType
-      //  recorderWithURLClientFormatFileTypeDelegate
     }
     this.isRecording = !this.isRecording;
   }
@@ -67,9 +54,6 @@ class NSEZRecorderDelegate extends NSObject {
   
   // delegate notifications and events
   public microphoneHasBufferListWithBufferSizeWithNumberOfChannels(microphone, bufferList, bufferSize, numberOfChannels) {
-    //console.log(`microphoneHasBufferList bufferList: ${bufferList}`);
-    //console.log(`microphoneHasBufferList bufferList.value: ${bufferList.value}`);
-    //console.log(`microphoneHasBufferList bufferSize: ${bufferSize}`);
     if (this.isRecording) {
        this.recorder.appendDataFromBufferListWithBufferSize(bufferList, bufferSize);
     }
@@ -77,34 +61,26 @@ class NSEZRecorderDelegate extends NSObject {
   
   public recorderUpdatedCurrentTime(recorder:any) {
     let formattedCurrentTime = recorder.formattedCurrentTime;
-    console.log(`formattedCurrentTime: ${formattedCurrentTime}`);
-    // if (this.audioEvents) {
-    //   this._recordTimeEvent.data.time = formattedCurrentTime;
-    //   this.audioEvents.notify(this._recordTimeEvent);  
-    // }
+    console.log(`recording time: ${formattedCurrentTime}`);
+    if (this.audioEvents) {
+      this._recordTimeEvent.data.time = formattedCurrentTime;
+      this.audioEvents.notify(this._recordTimeEvent);  
+    }
   }
   
   public microphoneHasAudioReceivedWithBufferSizeWithNumberOfChannels(microphone, buffer, bufferSize, numberOfChannels) {
     // console.log(`record buffer: ${buffer.value[0]}`);
     // console.log(`record bufferSize: ${bufferSize}`);
-    // if (this.audioEvents) {
-    //   this._bufferEvent.data.buffer = buffer.value;
-    //   this._bufferEvent.data.bufferSize = bufferSize;
-    //   this.audioEvents.notify(this._bufferEvent);  
-    // }
-    // __weak typeof (self) weakSelf = self;
-    // // Getting audio data as an array of float buffer arrays that can be fed into the
-    // // EZAudioPlot, EZAudioPlotGL, or whatever visualization you would like to do with
-    // // the microphone data.
-    // dispatch_async(dispatch_get_main_queue(),^{
-    //     // Visualize this data brah, buffer[0] = left channel, buffer[1] = right channel
-    //     [weakSelf.audioPlot updateBuffer:buffer[0] withBufferSize:bufferSize];
-    // });
+    if (this.audioEvents) {
+      this._bufferEvent.data.buffer = buffer.value;
+      this._bufferEvent.data.bufferSize = bufferSize;
+      this.audioEvents.notify(this._bufferEvent);  
+    }
   }
   
-  // public microphoneChangedDevice(device) {
-  //   console.log(`Changed input device: ${device}`);
-  // }
+  public microphoneChangedDevice(device) {
+    console.log(`Changed input device: ${device}`);
+  }
 
   public microphoneChangedPlayingState(mic: any, isPlaying: boolean) {
     console.log(`microphone changed state: ${isPlaying}`);
@@ -133,11 +109,11 @@ class NSEZRecorderDelegate extends NSObject {
 }
 
 // https://github.com/syedhali/EZAudio#EZRecorder
-export class NSEZRecorder {
-  private _delegate: NSEZRecorderDelegate;
+export class TNSEZRecorder {
+  private _delegate: TNSEZRecorderDelegate;
   
   constructor() {
-    this._delegate = new NSEZRecorderDelegate();
+    this._delegate = new TNSEZRecorderDelegate();
     this._delegate.initRecorder();
   }
 

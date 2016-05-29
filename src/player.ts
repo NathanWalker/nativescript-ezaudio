@@ -1,7 +1,7 @@
 import {Observable, EventData} from 'data/observable';
 import {EZNotificationObserver} from './core';
 
-class NSEZAudioDelegate extends NSObject implements EZAudioPlayerDelegate {
+class TNSEZAudioDelegate extends NSObject implements EZAudioPlayerDelegate {
   public static ObjCProtocols = [EZAudioPlayerDelegate];
   public player: any;
   public audioEvents: Observable;
@@ -165,7 +165,7 @@ class NSEZAudioDelegate extends NSObject implements EZAudioPlayerDelegate {
 }
 
 // https://github.com/syedhali/EZAudio#EZAudioPlayer
-export class NSEZAudioPlayer {
+export class TNSEZAudioPlayer {
   private _audioFileLoaded: boolean = false;
   private _currentAudioFile: EZAudioFile;
   private _currentAudioFilePath: string;
@@ -173,7 +173,7 @@ export class NSEZAudioPlayer {
   private _delegate: any;
   
   constructor(emitEvents?: boolean) {
-    this._delegate = new NSEZAudioDelegate();
+    this._delegate = new TNSEZAudioDelegate();
     this._delegate.initPlayer(emitEvents);
   }
   
@@ -298,11 +298,15 @@ export class NSEZAudioPlayer {
   }
   
   private loadAndPlayAudioFile(file: string) {
-    var fileParts = file.split('.');
-    var filePath = fileParts[0];
-    var fileExt = fileParts[1];
-    var soundPath = NSBundle.mainBundle().pathForResourceOfType(filePath, fileExt);
-    var url = NSURL.fileURLWithPath(soundPath);
+    let soundPath = file;
+    if (file.indexOf('/') !== 0) {
+      // using relative path, resolve to bundle
+      let fileParts = file.split('.');
+      let filePath = fileParts[0];
+      let fileExt = fileParts[1];
+      soundPath = NSBundle.mainBundle().pathForResourceOfType(filePath, fileExt);
+    }
+    let url = NSURL.fileURLWithPath(soundPath);
     this._currentAudioFile = EZAudioFile.audioFileWithURL(url);
     this._delegate.player.playAudioFile(this._currentAudioFile);  
     this._audioFileLoaded = true;

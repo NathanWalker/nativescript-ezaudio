@@ -1,9 +1,27 @@
-﻿button {
+﻿.recordTime {
+  horizontal-align: center;
+  font-size:18;
+  color:#fff;
+  top:120;
+  left:0;
+  width:100%;
+}
+
+button {
   font-size: 22;
   horizontal-align: center;
   margin:20px 0;
   color:#FFF803;
   top:20;
+  left:0;
+  width:100%;
+}
+
+.playBtn {
+  top:300;
+  color: green;
+  font-size: 22;
+  horizontal-align: center;
   left:0;
   width:100%;
 }
