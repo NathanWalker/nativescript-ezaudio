@@ -1,6 +1,8 @@
 /**
  * iOS Notifications
  */
+declare var interop: any;
+
 export class EZNotificationObserver extends NSObject {
   private _onReceiveCallback: (notification: NSNotification) => void;
 

@@ -1,6 +1,8 @@
 import {Observable, EventData} from 'data/observable';
 import {EZNotificationObserver} from './core';
 
+declare var EZAudioFile: any, EZAudioPlayerDelegate: any, EZAudioPlayer: any;
+
 class TNSEZAudioDelegate extends NSObject implements EZAudioPlayerDelegate {
   public static ObjCProtocols = [EZAudioPlayerDelegate];
   public player: any;

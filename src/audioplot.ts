@@ -1,12 +1,14 @@
 import {ContentView} from "ui/content-view";
 import {Color} from "color";
 
+declare var EZAudioPlot: any, CGRectMake: any, EZPlotTypeBuffer: any, EZPlotTypeRolling: any;
+
 export class AudioPlot extends ContentView {
   private _color: string;
   private _fill: boolean;
   private _mirror: boolean;
   private _plotType: any;
-  private _ios: EZAudioPlot;
+  private _ios: any;
   
   constructor() {
     super();
@@ -14,11 +16,11 @@ export class AudioPlot extends ContentView {
     this._ios = EZAudioPlot.alloc().initWithFrame(CGRectMake(0, 0, 0, 0));
   }
 
-  get _nativeView(): EZAudioPlot {
+  get _nativeView(): any {
     return this._ios;
   }
   
-  set color(value: string) {
+  set plotColor(value: string) {
     this._color = value;
     // console.log(`AudioPlot color: ${value}`);
     this._ios.color = new Color(value).ios;

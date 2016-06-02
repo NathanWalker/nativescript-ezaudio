@@ -30,7 +30,7 @@ npm install nativescript-ezaudio --save
   <AbsoluteLayout width="100%" height="100%">
     <ez:AudioPlot 
       class="audioPlot" 
-      color="{{audioPlotColor}}" 
+      plotColor="{{audioPlotColor}}" 
       plotType="{{audioPlotType}}" 
       fill="{{audioPlotFill}}" 
       mirror="{{audioPlotMirror}}" 
@@ -218,14 +218,14 @@ Displays an audio waveform and provides attributes to modify it's display.
 
 Example:
 ```
-<ez:AudioPlot color="#fff" plotType="buffer" fill="true" mirror="true" bufferData="{{audioPlotBufferData}}" />
+<ez:AudioPlot plotColor="#fff" plotType="buffer" fill="true" mirror="true" bufferData="{{audioPlotBufferData}}" />
 ```
 
 #### Attributes
 
 Property |  Value
 -------- | ---------
-`color`: `string` | Color of waveform. Any rgb hex value, ie. #fff
+`plotColor`: `string` | Color of waveform. Any rgb hex value, ie. #fff
 `plotType`: `string` | `buffer` or `rolling`
 `fill`: `boolean` | Makes waveform solid with color. When `false`, it appears more like lines.
 `mirror`: `boolean` | Whether to mirror the waveform top/bottom.
