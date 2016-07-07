@@ -173,6 +173,7 @@ export class TNSEZAudioPlayer {
   private _currentAudioFilePath: string;
   private _playing: boolean = false;
   private _delegate: any;
+  private _playbackSession: any;
   
   constructor(emitEvents?: boolean) {
     this._delegate = new TNSEZAudioDelegate();
@@ -185,6 +186,13 @@ export class TNSEZAudioPlayer {
   
   public togglePlay(fileName?: string, reloadTrack?: boolean) {
     if (!this._audioFileLoaded || reloadTrack) {
+      this._playbackSession = AVAudioSession.sharedInstance();
+      let errorRef = new interop.Reference();
+      this._playbackSession.setCategoryError(AVAudioSessionCategoryPlayback, errorRef);
+      if (errorRef) {
+        console.log(`setCategoryError: ${errorRef.value}`);
+      }
+      this._playbackSession.setActiveError(true, null);
       this.loadAndPlayAudioFile(fileName);
     } else if (this._playing) {
       this.pause();

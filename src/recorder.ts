@@ -16,13 +16,7 @@ class TNSEZRecorderDelegate extends NSObject {
   private _recordTimeEvent: EventData;
 
   public initRecorder() {
-    this._recordingSession = AVAudioSession.sharedInstance();
-    let errorRef = new interop.Reference();
-    this._recordingSession.setCategoryError(AVAudioSessionCategoryRecord, errorRef);
-    if (errorRef) {
-      console.log(`setCategoryError: ${errorRef.value}`);
-    }
-    this._recordingSession.setActiveError(true, null);
+    this.initSession();
     this._recordingSession.requestRecordPermission((allowed: boolean) => {
       if (allowed) {
         this.microphone = EZMicrophone.microphoneWithDelegate(this);
@@ -36,11 +30,24 @@ class TNSEZRecorderDelegate extends NSObject {
     });
   }
 
+  private initSession() {
+    this._recordingSession = AVAudioSession.sharedInstance();
+    let errorRef = new interop.Reference();
+    //AVAudioSessionCategoryRecord
+    //AVAudioSessionCategoryPlayAndRecord
+    this._recordingSession.setCategoryError(AVAudioSessionCategoryPlayAndRecord, errorRef);
+    if (errorRef) {
+      console.log(`setCategoryError: ${errorRef.value}`);
+    }
+    this._recordingSession.setActiveError(true, null);
+  }
+
   public toggleRecord(filePath?: string) {
     if (this.isRecording) {
       this.microphone.stopFetchingAudio();
       this.finish();
     } else {
+      this.initSession();
       this.microphone.startFetchingAudio();
 
       this.recorder = EZRecorder.recorderWithURLClientFormatFileTypeDelegate(NSURL.fileURLWithPath(filePath), this.microphone.audioStreamBasicDescription(), EZRecorderFileTypeM4A, this);

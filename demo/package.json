@@ -2,7 +2,7 @@
   "nativescript": {
     "id": "org.nativescript.demo",
     "tns-ios": {
-      "version": "2.0.0"
+      "version": "2.1.1"
     }
   },
   "scripts": {
@@ -11,7 +11,7 @@
   "dependencies": {
     "lodash": "^4.8.2",
     "nativescript-ezaudio": "file:..",
-    "tns-core-modules": "^2.0.1"
+    "tns-core-modules": "^2.1.0"
   },
   "devDependencies": {
     "nativescript-dev-typescript": "^0.3.2",

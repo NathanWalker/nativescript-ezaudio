@@ -4,9 +4,11 @@
 *.js.map
 demo/**/*.js
 demo/hooks
+demo/lib
 demo/platforms/
 demo/node_modules/
 demo/*d.ts
 demo/tsconfig.json
 node_modules
 *.log
+!ezaudio.d.ts
